@@ -2,23 +2,15 @@ package main
 
 import (
 	"fmt"
+	"os"
 )
 
 func main() {
-	nome := "Debora"
-	idade := 25
-	versao := 1.1
-	fmt.Println("Olá, sr. ", nome, " sua idade é ", idade)
-	fmt.Println("Este programa está na versão", versao)
+	exibeIntroducao()
 
-	fmt.Println("1- Iniciar Monitoramento")
-	fmt.Println("2- Exibir Logs")
-	fmt.Println("0- Sair do Programa")
+	exibeMenu()
 
-	var comando int
-	fmt.Scan(&comando)
-	fmt.Println("O endereço da minha variavel comando é ", &comando)
-	fmt.Println("O comando escolhido foi ", comando)
+	comando := lerComando()
 
 	switch comando {
 	case 1:
@@ -27,7 +19,29 @@ func main() {
 		fmt.Println("Exibindo Logs...")
 	case 0:
 		fmt.Println("Saindo do programa...")
+		os.Exit(0)
 	default:
 		fmt.Println("Não conheço este comando")
+		os.Exit(-1)
 	}
+}
+
+func exibeIntroducao() {
+	nome := "Douglas"
+	versao := 1.1
+	fmt.Println("Olá, sr.", nome)
+	fmt.Println("Este programa está na versão ", versao)
+}
+
+func exibeMenu() {
+	fmt.Println("1- Iniciar Monitoramento")
+	fmt.Println("2- Exibir Logs")
+	fmt.Println("0- Sair do Programa")
+}
+
+func lerComando() int {
+	var comandoLido int
+	fmt.Scan(&comandoLido)
+	fmt.Println("O comando escolhido foi ", comandoLido)
+	return comandoLido
 }

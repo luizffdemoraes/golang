@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"net/http"
 )
 
 func main() {
@@ -27,7 +28,7 @@ func main() {
 }
 
 func exibeIntroducao() {
-	nome := "Douglas"
+	nome := "Luiz"
 	versao := 1.1
 	fmt.Println("Olá, sr.", nome)
 	fmt.Println("Este programa está na versão ", versao)
@@ -47,8 +48,8 @@ func lerComando() int {
 }
 
 func iniciarMonitoramento() {
-	fmt.Println("Monitorando...")
-	site := "https://www.alura.com.br"
-	fmt.Println(site)
-	// resp, err := http.Get(site)
+    fmt.Println("Monitorando...")
+    site := "https://www.alura.com.br"
+    resp, _ := http.Get(site)
+    fmt.Println(resp)
 }

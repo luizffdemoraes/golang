@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"reflect"
 )
 
 func main() {
@@ -53,12 +52,26 @@ func lerComando() int {
 func iniciarMonitoramento() {
 	fmt.Println("Monitorando...")
 
-	var sites [4]string
-	sites[0] = "https://random-status-code.herokuapp.com/"
-	sites[1] = "https://www.alura.com.br"
-	sites[2] = "https://www.caelum.com.br"
+	//var sites [4]string
+	//sites[0] = "https://random-status-code.herokuapp.com/"
+	//sites[1] = "https://www.alura.com.br"
+	//sites[2] = "https://www.caelum.com.br"
 
-	fmt.Println(reflect.TypeOf(sites))
+	sites := []string{"https://random-status-code.herokuapp.com/",
+		"https://www.alura.com.br", "https://www.caelum.com.br"}
+
+	//fmt.Println(reflect.TypeOf(sites))
+
+	// for tradicional no go
+	//for i := 0; i < len(sites); i++ {
+	//	fmt.Println(sites[i])
+	//}
+
+	//retorna a posição e o valor
+	for i, site := range sites {
+		fmt.Println("Estou passando na posição", i,
+			"do meu slice e essa posição tem o site", site)
+	}
 
 	fmt.Println(sites)
 

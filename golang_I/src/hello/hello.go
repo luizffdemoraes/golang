@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	//"io/ioutil"
+	"bufio"
 	"net/http"
 	"os"
 	"time"
@@ -11,7 +13,7 @@ const monitoramentos = 3
 const delay = 5
 
 func main() {
-	exibeNomes()
+	// exibeNomes()
 	leSitesDoArquivo()
 	exibeIntroducao()
 
@@ -101,13 +103,23 @@ func testaSite(site string) {
 func leSitesDoArquivo() []string {
 
 	var sites []string
+
 	arquivo, err := os.Open("sites.txt")
+	//arquivo, err := ioutil.ReadFile("sites.txt")
 
 	if err != nil {
 		fmt.Println("Ocorreu um erro:", err)
 	}
 
-	fmt.Println(arquivo)
+	leitor := bufio.NewReader(arquivo)
+
+	linha, err := leitor.ReadString('\n')
+
+	if err != nil {
+		fmt.Println("Ocorreu um erro:", err)
+	}
+
+	fmt.Println(linha)
 
 	return sites
 }

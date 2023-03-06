@@ -1,9 +1,12 @@
 package main
 
 import (
-	"fmt"
-	//"io/ioutil"
 	"bufio"
+	"fmt"
+	"io"
+	"strings"
+
+	//"io/ioutil"
 	"net/http"
 	"os"
 	"time"
@@ -104,8 +107,8 @@ func leSitesDoArquivo() []string {
 
 	var sites []string
 
-	arquivo, err := os.Open("sites.txt")
-	//arquivo, err := ioutil.ReadFile("sites.txt")
+	arquivo, err := os.Open("sites.txt") //utilizado para passar a referência
+	//arquivo, err := ioutil.ReadFile("sites.txt") --> Utilizado para exibir o testo todos
 
 	if err != nil {
 		fmt.Println("Ocorreu um erro:", err)
@@ -113,13 +116,19 @@ func leSitesDoArquivo() []string {
 
 	leitor := bufio.NewReader(arquivo)
 
-	linha, err := leitor.ReadString('\n')
-
-	if err != nil {
-		fmt.Println("Ocorreu um erro:", err)
+	for {
+		// delimitar até onde será feito a leitura
+		linha, err := leitor.ReadString('\n')
+		fmt.Println(linha)
+		// Remover espaços
+		linha = strings.TrimSpace(linha)
+		sites = append(sites, linha)
+		if err == io.EOF {
+			break
+		}
 	}
 
-	fmt.Println(linha)
+	arquivo.Close()
 
 	return sites
 }
